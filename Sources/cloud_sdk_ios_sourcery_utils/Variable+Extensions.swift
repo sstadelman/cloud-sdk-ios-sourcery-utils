@@ -61,16 +61,10 @@ extension Variable {
     public func resolvedViewModifierChain(type: Type) -> String {
         """
         var \(trimmedName): some View {
-            _\(trimmedName)().modifier(\(trimmedName)Modifier.concat(Fiori.\(type.componentName).\(trimmedName)))
-        }
+                _\(trimmedName)().modifier(\(trimmedName)Modifier.concat(Fiori.\(type.componentName).\(trimmedName)))
+            }
         """
     }
 }
 
-extension Array where Element == Variable {
-    public func resolvedViewModifierChain(type: Type) -> String {
-        """
-        \(map { $0.resolvedViewModifierChain(type: type) }.joined(separator: "\n"))
-        """
-    }
-}
+

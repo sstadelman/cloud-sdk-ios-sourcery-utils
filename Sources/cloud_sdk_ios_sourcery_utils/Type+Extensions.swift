@@ -8,6 +8,19 @@
 import Foundation
 import SourceryRuntime
 
+// MARK: - Public API
+extension Type {
+    /**
+     Declares additional 'non-model' `ViewBuilder` generic types
+     Follows list of `componentProperties.templateParameterDecls`
+     ```
+     struct AcmeComponent<Title: View, /* starts here => */ AcmeView: View, ...
+     ```
+     */
+    public var add_view_builder_paramsTemplateParameterDecls: Array<String> {
+        resolvedAnnotations("add_view_builder_params").map({ "\($0.capitalizingFirst()): View" })
+    }
+}
 extension Type {
 
     public var componentName: String {
@@ -32,8 +45,12 @@ extension Type {
         }
     }
 
-    public func add_env_propsDecls(indent level: Int) -> String {
-        resolvedAnnotations("add_env_props").map({ "@Environment(\\.\($0)) var \($0)" }).joined(separator: carriageRet(level))
+    public var add_view_builder_paramsDecls: String {
+        resolvedAnnotations("add_view_builder_params").map({ "@Environment(\\.\($0)) var \($0)" }).joined(separator: "\n\t")
+    }
+    
+    public var add_env_propsDecls: String {
+        resolvedAnnotations("add_env_props").map({ "@Environment(\\.\($0)) var \($0)" }).joined(separator: "\n\t")
     }
 
     public func add_public_propsDecls(indent level: Int) -> String {
