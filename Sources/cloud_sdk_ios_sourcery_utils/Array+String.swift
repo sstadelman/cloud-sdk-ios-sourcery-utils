@@ -18,4 +18,5 @@ extension Array where Element == String {
     }
     
     func foo() {}
+    func bar() {}
 }
