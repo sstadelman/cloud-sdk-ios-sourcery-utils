@@ -16,4 +16,6 @@ extension Array where Element == String {
             return String(split)
         })
     }
+    
+    func foo() {}
 }
