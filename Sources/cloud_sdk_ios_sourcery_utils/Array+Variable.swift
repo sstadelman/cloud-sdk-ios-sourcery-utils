@@ -11,6 +11,7 @@ import SourceryRuntime
 // MARK: Public API
 extension Array where Element == Variable {
     
+    public func foo() -> String { "Foo" }
     /**
      Formats a list `View`-conforming generic parameter for struct declaration.
      
